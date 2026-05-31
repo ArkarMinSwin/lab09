@@ -2,6 +2,9 @@
 require_once("settings.php");
 
 $conn = mysqli_connect($host, $user, $pwd, $sql_db);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 if (isset($_GET['model'])) {
 
@@ -28,16 +31,13 @@ if (isset($_GET['model'])) {
         }
 
         echo "</table>";
-
     } else {
 
         echo "🚫 No matching cars found.";
     }
-
 } else {
 
     echo "Please enter a model to search.";
 }
 
 mysqli_close($conn);
-?>
